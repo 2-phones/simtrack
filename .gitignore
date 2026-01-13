@@ -10,6 +10,9 @@
 !.yarn/releases
 !.yarn/versions
 
+#폴더구조
+dirTree.md
+
 # testing
 /coverage
 
