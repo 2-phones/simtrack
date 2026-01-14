@@ -9,6 +9,7 @@ interface UsimScannerProps {
 }
 
 export default function UsimScanner({ onScanSuccess, isPaused }: UsimScannerProps) {
+
   useEffect(() => {
     const config = {
       fps: 25,
@@ -31,7 +32,9 @@ export default function UsimScanner({ onScanSuccess, isPaused }: UsimScannerProp
       (decodedText) => {
         // 부모의 isPaused 상태를 체크하여 실행
         if (!isPaused) {
-          onScanSuccess(decodedText);
+         const s= onScanSuccess(decodedText);
+
+  console.log(`onScanSuccess : ${s}`)
           if (navigator.vibrate) navigator.vibrate(100);
         }
       },
