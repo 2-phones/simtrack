@@ -32,9 +32,7 @@ export default function UsimScanner({ onScanSuccess, isPaused }: UsimScannerProp
       (decodedText) => {
         // 부모의 isPaused 상태를 체크하여 실행
         if (!isPaused) {
-         const s= onScanSuccess(decodedText);
-
-  console.log(`onScanSuccess : ${s}`)
+        onScanSuccess(decodedText);
           if (navigator.vibrate) navigator.vibrate(100);
         }
       },
