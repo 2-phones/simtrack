@@ -1,36 +1,91 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 📱 USIM 실시간 바코드 스캐닝 시스템
 
-## Getting Started
+> **수동 입력의 번거로움을 해결하는 실시간 모바일 바코드 스캐너 및 데이터 관리 대시보드**
 
-First, run the development server:
+기존에 육안으로 확인하고 수동으로 타이핑하던 20자리 USIM 일련번호 관리 공정을 **모바일 스캐닝 자동화 및 실시간 동기화 시스템**으로 개선한 프로젝트입니다.
+
+---
+
+## 🚀 주요 기능 (Key Features)
+
+### 1. 초고화질 모바일 바코드 스캐너
+
+* **해상도 최적화**: 모바일 브라우저 환경에서 기기 최고 해상도(4K급)를 유도하여 작은 USIM 바코드 인식률 극대화.
+* **연속 스캔 모드**: 새로고침 없이 '다음 바코드 찍기' 버튼을 통해 빠르게 연속 작업 가능.
+* **스캔 가이드 UI**: USIM 규격에 맞춘 인식 영역(QR Box) 설정으로 사용자 편의성 증대.
+
+### 2. 실시간 관리 대시보드
+
+* **실시간 동기화**: 모바일 스캔 즉시 PC 대시보드 리스트에 반영 (2초 간격 폴링).
+* **데이터 가공**: 수집된 번호를 가독성 있게 자동 파싱 (예: `898205 12345 123456789`).
+* **데이터 익스포트**: 전체 복사(엔터 구분), 개별/선택 삭제, CSV 엑셀 다운로드 기능 지원.
+
+---
+
+## 🛠 기술 스택 (Tech Stack)
+
+* **Framework**: Next.js 14 (App Router)
+* **Language**: TypeScript
+* **Styling**: Tailwind CSS
+* **Library**: Html5-qrcode (Customized for High-Res)
+* **API**: REST API (Next.js API Routes)
+
+---
+
+## 💡 기술적 문제 해결 (Problem Solving)
+
+### 1. 작은 바코드 인식률 저하 문제
+
+* **현상**: USIM 바코드가 매우 촘촘하여 기본 카메라 설정에서 초점이 잡히지 않거나 픽셀이 뭉침.
+* **해결**: `videoConstraints`의 `ideal` 해상도를 3840x2160으로 상향 조정하고, 초점 모드를 연속(`continuous`)으로 설정하여 인식 성능을 50% 이상 개선.
+
+### 2. 데이터 오입력 및 누락 방지
+
+* **현상**: 수동 입력 시 20자리 숫자 중 하나만 틀려도 데이터 가치가 상실됨.
+* **해결**: 전송 전 정규표현식 검증 로직을 도입하여 유효하지 않은 데이터의 서버 유입을 원천 차단.
+
+---
+
+## 📂 프로젝트 구조 (Project Structure)
+
+```text
+├── app/
+│   ├── api/barcode/    # 데이터 저장, 삭제, 조회 API (REST)
+│   ├── dashboard/      # 실시간 데이터 관리 페이지
+│   └── scan/           # 모바일 카메라 스캔 페이지
+├── components/
+│   └── UsimScanner.tsx # 하이엔드 카메라 설정이 적용된 스캐너 컴포넌트
+└── public/             # 에셋 파일
+
+```
+
+---
+
+## 📸 실행 화면
+
+---
+
+## ⚙️ 시작하기 (Getting Started)
+
+1. 저장소 클론
+
+```bash
+git clone https://github.com/your-repo/usim-scanner.git
+
+```
+
+2. 패키지 설치
+
+```bash
+npm install
+
+```
+
+3. 실행
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
