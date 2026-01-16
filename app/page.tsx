@@ -13,10 +13,10 @@ export default function Home() {
         >
           새 USIM 스캔하기
         </Link>
-        
-        <button className="border border-gray-300 py-4 rounded-xl font-bold hover:bg-gray-50 transition">
-          시험번호 목록 보기
-        </button>
+          <Link href="/numberlist" className="border border-gray-300 py-4 rounded-xl font-bold hover:bg-gray-50 transition">
+    시험번호 목록 보기
+</Link>
+
       </div>
     </main>
   );
