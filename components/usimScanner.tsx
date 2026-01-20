@@ -12,11 +12,17 @@ export default function UsimScanner({ onScanSuccess, isPaused }: UsimScannerProp
 
   useEffect(() => {
     const config = {
-      fps: 25,
+      fps: 20,
       qrbox: { width: 280, height: 120 },
-      aspectRatio: 1.0,
+      aspectRatio: 1.77, // 16:9 비율 유지 (스마트폰 카메라 최적)
+      experimentalFeatures: {
+        useBarCodeDetectorIfSupported: true // 브라우저 자체 바코드 감지기 사용 (매우 빠름)
+      },
       formatsToSupport: [ 
         Html5QrcodeSupportedFormats.CODE_128,
+        Html5QrcodeSupportedFormats.CODE_93,
+        Html5QrcodeSupportedFormats.CODE_39,
+        Html5QrcodeSupportedFormats.ITF,
         Html5QrcodeSupportedFormats.EAN_13
       ],
       videoConstraints: {
